@@ -31,9 +31,14 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
+# コメントアウトを外す
+Dir[Rails.root.join("spec", "support", "**", "*.rb")].sort.each { |f| require f }
+
 I18n.locale = "en"
 
 RSpec.configure do |config|
+  # 追記
+  config.include SignInSupport
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
